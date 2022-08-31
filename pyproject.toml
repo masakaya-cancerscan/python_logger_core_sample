@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python_logger_core_sample"
-version = "0.1.5"
+version = "0.1.6"
 description = ""
 authors = ["Masashi.Kayahara <masashi.kayahara@arc-connects.com>"]
 
