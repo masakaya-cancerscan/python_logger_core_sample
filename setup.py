@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
     name='python_logger_core_sample',
     version='0.0.2',
-    packages=[''],
+    packages=setuptools.find_packages(),
     url='https://github.com/masakaya/python_logger_core_sample',
     license='MIT',
     author='Masashi Kayahara',
