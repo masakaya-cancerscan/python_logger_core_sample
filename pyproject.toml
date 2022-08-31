@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "python_logger_core_sample1"
-version = "0.1.18"
+name = "python_logger_core_sample"
+version = "0.1.19"
 description = ""
 authors = ["Masashi.Kayahara <masashi.kayahara@arc-connects.com>"]
 
 packages = [
-    { include = "masakaya" },
+    { include = "masakaya/*.py" },
 ]
 
 [tool.poetry.dependencies]
