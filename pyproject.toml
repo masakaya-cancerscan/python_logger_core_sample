@@ -5,7 +5,7 @@ description = ""
 authors = ["Masashi.Kayahara <masashi.kayahara@arc-connects.com>"]
 
 packages = [
-    { include = "cs.core.logger" },
+    { include = "cs/core/logger" },
 ]
 
 [tool.poetry.dependencies]
