@@ -1,5 +1,7 @@
-# -*- coding: utf-8 -*-
-from setuptools import setup
+import setuptools
+
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
 
 packages = \
 ['cs', 'cs.core.logger']
@@ -7,19 +9,15 @@ packages = \
 package_data = \
 {'': ['*']}
 
-setup_kwargs = {
-    'name': 'python-logger-core-sample',
-    'version': '0.1.14',
-    'description': '',
-    'long_description': 'None',
-    'author': 'Masashi.Kayahara',
-    'author_email': 'masashi.kayahara@arc-connects.com',
-    'maintainer': 'None',
-    'maintainer_email': 'None',
-    'url': 'None',
-    'packages': packages,
-    'package_data': package_data,
-    'python_requires': '>=3.10,<4.0',
-}
-
-setup(**setup_kwargs)
+setuptools.setup(
+    name='python_logger_core_sample',
+    version='0.0.2',
+    packages=packages,
+    package_date= package_data,
+    url='https://github.com/masakaya/python_logger_core_sample',
+    license='MIT',
+    author='Masashi Kayahara',
+    author_email='masashi.kayahara@arc-connects.com',
+    description='',
+    python_requires=">=3.7",
+)
