@@ -8,6 +8,11 @@ packages = [
     { include = "masakaya" },
 ]
 
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "pep440"
+
 [tool.poetry.dependencies]
 python = "^3.10"
 google-cloud-logging = ">=3.0.0"
