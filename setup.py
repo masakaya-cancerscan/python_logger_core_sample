@@ -7,7 +7,7 @@ setuptools.setup(
     name='python-logger-core-sample',
     version='0.0.2',
     packages=[''],
-    url='https://github.com/masakaya/python-logger-core-sample',
+    url='https://github.com/masakaya/python_logger_core_sample',
     license='MIT',
     author='Masashi Kayahara',
     author_email='masashi.kayahara@arc-connects.com',
