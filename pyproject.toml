@@ -4,6 +4,10 @@ version = "0.1.0"
 description = ""
 authors = ["Masashi.Kayahara <masashi.kayahara@arc-connects.com>"]
 
+packages = [
+    { include = "cs/core/logger/*.py" },
+]
+
 [tool.poetry.dependencies]
 python = "^3.10"
 google-cloud-logging = ">=3.0.0"
