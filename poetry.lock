@@ -27,7 +27,7 @@ unicode_backport = ["unicodedata2"]
 
 [[package]]
 name = "google-api-core"
-version = "2.9.0"
+version = "2.10.0"
 description = "Google API client core library"
 category = "main"
 optional = false
@@ -303,8 +303,8 @@ charset-normalizer = [
     {file = "charset_normalizer-2.1.1-py3-none-any.whl", hash = "sha256:83e9a75d1911279afd89352c68b45348559d1fc0506b054b346651b5e7fee29f"},
 ]
 google-api-core = [
-    {file = "google-api-core-2.9.0.tar.gz", hash = "sha256:6ea6c0b2f1c7797249ad8163fd252ece6e54431a9663fae352331b808289def8"},
-    {file = "google_api_core-2.9.0-py3-none-any.whl", hash = "sha256:751ffddde768164b81d4763d5717e492c8cac09d8e9a424df20021d86e386919"},
+    {file = "google-api-core-2.10.0.tar.gz", hash = "sha256:1d053734f14591939e7764e99c31253fed46bf2578da0dcd82821f17a6dd991c"},
+    {file = "google_api_core-2.10.0-py3-none-any.whl", hash = "sha256:325529859836a479244b0882c1a77320fd35cb108df2ec1232e3e908ea56eda4"},
 ]
 google-auth = [
     {file = "google-auth-2.11.0.tar.gz", hash = "sha256:ed65ecf9f681832298e29328e1ef0a3676e3732b2e56f41532d45f70a22de0fb"},

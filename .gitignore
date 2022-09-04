@@ -129,3 +129,6 @@ dmypy.json
 .pyre/
 
 .idea
+
+# google credencial json
+service_account.json

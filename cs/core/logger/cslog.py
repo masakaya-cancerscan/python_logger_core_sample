@@ -24,22 +24,19 @@ class CsLogger:
         else:
             log_config = AppConfig.get_config_dict(self.config_file)
 
-        # set google cloud logging
-
         logging.config.dictConfig(log_config)
         logger = logging.getLogger(log_type + "." + log_name)
         return logger
 
 
-
 def get_logger():
-    client = google.cloud.logging.Client()
-    credentials = service_account.Credentials.from_service_account_file(AppConfig.get_config_dir('service_account.json'))
-    logging_client = Client(project='loggersample', credentials=credentials)
-    handler = CloudLoggingHandler(logging_client, name='DEFAULT_LOGGER')
+    #credentials = service_account.Credentials.from_service_account_file(AppConfig.get_config_dir('service_account.json'))
+    #logging_client = Client(project='loggersample', credentials=credentials)
+    #logging_client = Client()
+    #handler = CloudLoggingHandler(logging_client, name='bbb')
 
     # logging.config.dictConfig(yaml.safe_load(open("config.yml").read()))
-    # logging.config.dictConfig(AppConfig.get_config_dict("logging_config.yml"))
-    logger = logging.getLogger('develop')
-    logger.addHandler(handler)
+    logging.config.dictConfig(AppConfig.get_config_dict("logging_config.yml"))
+    logger = logging.getLogger('default')
+    #logger.addHandler(handler)
     return logger

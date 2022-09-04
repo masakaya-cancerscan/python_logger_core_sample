@@ -8,22 +8,20 @@ handlers:
     level: DEBUG
     formatter: simple
     stream: ext://sys.stdout
-  google_cloud:
-    class: logging.StreamHandler
+  cloud_logging:
+    class: cs.core.logger.handler.CsCloudLoggingHandler
     level: DEBUG
     formatter: simple
-    stream: ext://sys.stdout
 loggers:
-  develop:
+  default:
     level: DEBUG
-    handlers: [console]
+    handlers: [cloud_logging]
     propagate: no
-  production:
-    level: INFO
-    handlers: [ console ]
-    propagate: no
+#  default:
+#    level: INFO
+#    handlers: [ cloud_logging ]
+#    propagate: no
 # Root Loggerはデフォルトで未使用とする
-#
 root:
   level: DEBUG
   handlers: []
