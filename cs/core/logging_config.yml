@@ -1,0 +1,29 @@
+version: 1
+formatters:
+  simple:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+    stream: ext://sys.stdout
+  google_cloud:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+    stream: ext://sys.stdout
+loggers:
+  develop:
+    level: DEBUG
+    handlers: [console]
+    propagate: no
+  production:
+    level: INFO
+    handlers: [ console ]
+    propagate: no
+# Root Loggerはデフォルトで未使用とする
+#
+root:
+  level: DEBUG
+  handlers: []
