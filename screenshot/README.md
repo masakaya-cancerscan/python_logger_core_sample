@@ -1,4 +1,9 @@
 
+# 開発時
+![image](https://user-images.githubusercontent.com/1237574/188300248-c1d95f68-dcd5-4e10-b476-047236ba4cf2.png)
+
+# Google Cloud Logging連携時
+
 ■一覧
 ![image](https://user-images.githubusercontent.com/1237574/188300079-bab844bb-82e3-41ae-bcc1-5e400fc4b7d1.png)
 
