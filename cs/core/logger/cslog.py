@@ -17,7 +17,7 @@ class CsLogger:
     def __init__(self, config_file=''):
         self.config_file = config_file
 
-    def get_logger(self, log_type='develop', log_name=''):
+    def get_logger(self, name, log_type='default'):
 
         if not self.config_file:
             log_config = AppConfig.get_config_dict("logging_config.yml")
@@ -25,18 +25,5 @@ class CsLogger:
             log_config = AppConfig.get_config_dict(self.config_file)
 
         logging.config.dictConfig(log_config)
-        logger = logging.getLogger(log_type + "." + log_name)
+        logger = logging.getLogger(log_type + "." + name)
         return logger
-
-
-def get_logger():
-    #credentials = service_account.Credentials.from_service_account_file(AppConfig.get_config_dir('service_account.json'))
-    #logging_client = Client(project='loggersample', credentials=credentials)
-    #logging_client = Client()
-    #handler = CloudLoggingHandler(logging_client, name='bbb')
-
-    # logging.config.dictConfig(yaml.safe_load(open("config.yml").read()))
-    logging.config.dictConfig(AppConfig.get_config_dict("logging_config.yml"))
-    logger = logging.getLogger('default')
-    #logger.addHandler(handler)
-    return logger
