@@ -1,12 +1,15 @@
 from cs.core.logger import cslog
 from cs.core.logger.cslog import CsLogger
+from cs.core.logger.cslog import trace_log
 
 logger = CsLogger().get_logger(__name__)
 
 def zero_division():
     1/0
 
-if __name__ == '__main__':
+
+@trace_log(logger)
+def main():
     # 'application' code
     logger.debug('debug message')
     logger.info('info message')
@@ -16,11 +19,11 @@ if __name__ == '__main__':
 
     # コンソールは出力されないが、Google Cloud Loggingには自動的に出力される
     custom_dict = {
-        'custom1':"test1"
+        'custom1': "test1"
     }
-    logger.info('custom value',extra=custom_dict)
+    logger.info('custom value', extra=custom_dict)
+    zero_division()
 
-    try:
-        zero_division()
-    except Exception as ex:
-        logger.error(ex, exc_info=True)
+
+if __name__ == '__main__':
+    main()
