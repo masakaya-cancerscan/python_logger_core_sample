@@ -19,3 +19,30 @@
 ■スタックトレース
 ![image](https://user-images.githubusercontent.com/1237574/188300040-32b25adb-bc7b-4e6d-853d-abf0a81cc434.png)
 
+
+```
+{
+  "insertId": "mr67gffznk9ev",
+  "jsonPayload": {
+    "message": "critical message"
+  },
+  "resource": {
+    "type": "global",
+    "labels": {
+      "project_id": "loggersample"
+    }
+  },
+  "timestamp": "2022-09-07T00:11:51.726848Z",
+  "severity": "CRITICAL",
+  "labels": {
+    "python_logger": "develop.__main__"
+  },
+  "logName": "projects/loggersample/logs/python",
+  "sourceLocation": {
+    "file": "/home/user/repo/python_logger_core_sample/sample/cs_loggger.py",
+    "line": "15",
+    "function": "<module>"
+  },
+  "receiveTimestamp": "2022-09-07T00:11:52.009030332Z"
+}
+```
