@@ -86,6 +86,19 @@ logName=~".*\/application" AND
 ![image](https://user-images.githubusercontent.com/1237574/189513020-05817e6f-840d-4132-ac5e-18c0f46712f4.png)
 
 ## 通知設定
+※Slackとの認証が入るため、手動で設定する or auth_tokenを引数に渡して設定すること
+```
+resource "google_monitoring_notification_channel" "slack" {
+  display_name = "Slack"
+  type         = "slack"
+
+  labels = {
+    auth_token   = "SECRET"
+    channel_name = "#channel"
+  }
+}
+```
+
 ![image](https://user-images.githubusercontent.com/1237574/189513531-6da0108c-c5a8-4586-b2fe-07a47ed3bb9a.png)
 
 ```
