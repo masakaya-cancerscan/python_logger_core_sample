@@ -1,7 +1,14 @@
 # python-logger-core-sample
 
-## console log
+# Run cli
+```
+export PYTHONPATH="/{path}/python_logger_core_sample:$PYTHONPATH"
+python sample/cs_logger.py
+```
 
+# Output Sample
+
+## console log
 ```
 /home/user/repo/python_logger_core_sample/.venv/bin/python /home/user/repo/python_logger_core_sample/sample/cs_logger.py 
 [2022-09-07 09:11:51,724][DEBUG   ][/home/user/repo/python_logger_core_sample/sample/cslog.py:11] debug message
