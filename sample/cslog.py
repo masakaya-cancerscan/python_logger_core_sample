@@ -1,11 +1,11 @@
-from cs.core.logger import cslog
 from cs.core.logger.cslog import CsLogger
 from cs.core.logger.cslog import trace_log
 
 logger = CsLogger().get_logger(__name__)
 
+
 def zero_division():
-    1/0
+    1 / 0
 
 
 @trace_log(logger)
