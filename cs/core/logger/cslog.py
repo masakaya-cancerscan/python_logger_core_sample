@@ -1,6 +1,8 @@
 import inspect
 
 import logging.config
+import os
+
 from cs.core.utils.config import AppConfig
 from functools import wraps
 
@@ -16,7 +18,10 @@ class CsLogger:
         else:
             log_config = AppConfig.get_config_dict(self.config_file)
 
-        # 環境変数(environment)
+        # 環境変数(ENVIRONMENT)からLoggerの切り替え
+        env = os.environ.get('ENVIRONMENT')
+        if env is not None:
+            log_type = env
 
         logging.config.dictConfig(log_config)
         logger: logging.Logger = logging.getLogger(log_type + "." + name)
