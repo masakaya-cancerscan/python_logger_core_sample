@@ -51,5 +51,47 @@
 
 GCSへログをルーティング
 
+※以下はTerraformにて管理すること
+
+## ルール
+```
+logName=~".*\/application"
+```
+
 ![image](https://user-images.githubusercontent.com/1237574/189511879-4468f79f-62c8-40e6-ad69-e020a09f93bc.png)
 
+
+## GCSへの表示
+
+yyyy/MM/dd/*.json
+![image](https://user-images.githubusercontent.com/1237574/189513602-70b7eb3e-e5bf-4a1a-9af7-8ccaae2af911.png)
+
+
+# アラート設定
+
+※以下はTerraformにて管理すること
+
+設定
+
+## ルール
+```
+logName=~".*\/application" AND
+(severity="ERROR" OR severity="CRITICAL")```
+```
+
+![image](https://user-images.githubusercontent.com/1237574/189512992-40b410ad-0220-47ef-b5e2-59525909df05.png)
+
+## 通知ポリシー
+
+![image](https://user-images.githubusercontent.com/1237574/189513020-05817e6f-840d-4132-ac5e-18c0f46712f4.png)
+
+## 通知設定
+![image](https://user-images.githubusercontent.com/1237574/189513531-6da0108c-c5a8-4586-b2fe-07a47ed3bb9a.png)
+
+```
+通知：5分（最小値）
+クルーズ：30分（最小値）
+```
+
+## 通知されたときの内容
+![image](https://user-images.githubusercontent.com/1237574/189514027-26dc202e-cc51-40d7-8b74-fb61c7703b82.png)
