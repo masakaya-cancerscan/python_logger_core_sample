@@ -46,3 +46,10 @@
   "receiveTimestamp": "2022-09-07T00:11:52.009030332Z"
 }
 ```
+
+#シンク設定
+
+GCSへログをルーティング
+
+![image](https://user-images.githubusercontent.com/1237574/189511879-4468f79f-62c8-40e6-ad69-e020a09f93bc.png)
+
