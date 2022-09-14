@@ -48,6 +48,7 @@ class CsLogger():
             log_config = AppConfig.get_config_dict(log_config_path)
             print('load library default config.({})'.format(log_config_path))
         else:
+            print('load application logger config.({})'.format(log_config_path))
             log_config = AppConfig.get_config_dict(log_config_path)
 
         # 環境変数(ENVIRONMENT)からLoggerの切り替え
@@ -101,7 +102,6 @@ class CsLogger():
             search_dir = os.path.dirname(os.path.abspath(cls._call_filepath))
             find_path = os.path.join(search_dir, LOGGING_CONFIG_NAME)
             if os.path.exists(find_path):
-                print('detect logger_config file.')
                 return find_path
             else:
                 parent_dir_path = os.path.dirname(search_dir)
@@ -110,7 +110,6 @@ class CsLogger():
             find_path = os.path.join(path, LOGGING_CONFIG_NAME)
             if os.path.exists(find_path):
                 # detect config file
-                print('detect logger_config file.')
                 return find_path
             else:
                 parent_dir_path = os.path.dirname(path)
