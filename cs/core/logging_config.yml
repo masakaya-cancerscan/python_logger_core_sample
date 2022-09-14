@@ -16,7 +16,7 @@ handlers:
 loggers:
   develop:
     level: DEBUG
-    handlers: [console, cloud_logging]
+    handlers: [console]
     propagate: no
   staging:
     level: INFO
