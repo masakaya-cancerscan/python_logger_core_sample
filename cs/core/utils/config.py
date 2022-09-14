@@ -18,9 +18,8 @@ class AppConfig:
         return config_file
 
     @staticmethod
-    def get_config_dict(filename):
-        config_file = AppConfig.get_config_dir(filename)
-        with open(os.path.join(config_file), 'r', encoding='UTF-8') as f:
+    def get_config_dict(file_path):
+        with open(os.path.join(file_path), 'r', encoding='UTF-8') as f:
             config = f.read()
         return yaml.safe_load(config)
 
