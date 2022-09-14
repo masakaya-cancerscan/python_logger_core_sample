@@ -1,5 +1,5 @@
-from cs.core.logger.cslog import CsLogger
-from cs.core.logger.cslog import trace_log
+from cs.core.logger.cs_logger import CsLogger
+from cs.core.logger.trace import trace_log
 
 logger = CsLogger.get_instance().get_logger(__name__)
 
