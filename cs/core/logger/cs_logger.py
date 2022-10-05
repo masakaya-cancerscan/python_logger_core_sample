@@ -69,6 +69,8 @@ class CsLogger():
         if not cls._instance:
             cls._instance = cls.__internal_new__()
             return cls._instance
+        else:
+            return cls._instance
 
     @classmethod
     def clear_instance(cls):
