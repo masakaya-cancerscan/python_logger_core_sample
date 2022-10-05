@@ -1,7 +1,8 @@
 import logging
-import os
+
 from logging import NullHandler
 
+from google.auth.exceptions import DefaultCredentialsError
 from google.cloud.logging.handlers import CloudLoggingHandler
 from google.cloud.logging import Client
 
@@ -18,12 +19,12 @@ class CsCloudLoggingHandler(logging.StreamHandler):
             name=LOG_NAME,
     ):
         _name = name
-        env = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
-        if env is not None:
+        try:
             # Cloud Logging用ハンドラを生成する
             self._handler = DefaultCloudLoggingHandler().__init__()
-        else:
+        except DefaultCredentialsError as ex:
             # NullHandlerを生成する
+            print("cloud_logging error. Create NullHandler.")
             self._handler = NullHandler().__init__()
 
     def emit(self, record: logging.LogRecord) -> None:
