@@ -15,7 +15,7 @@ SEARCH_LOGGING_CONFIG_FILE_DEPTH: int = 3
 class CsLogger():
     _instance = None
     _call_filepath = None
-    _log_type = None
+    _log_type = "develop"
 
     def __new__(cls):
         """
