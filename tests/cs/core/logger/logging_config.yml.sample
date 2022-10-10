@@ -16,7 +16,7 @@ handlers:
 loggers:
   develop:
     level: DEBUG
-    handlers: [console,cloud_logging]
+    handlers: [console]
     propagate: no
   staging:
     level: INFO
@@ -33,4 +33,4 @@ loggers:
 # Root LoggerはTraceログのみ有効とする
 root:
   level: DEBUG
-  handlers: [console]
+  handlers: [console, cloud_logging]

@@ -37,7 +37,7 @@ def trace_log(logger):
                 logger.error(f'[Trace][Exception] {trace_data}')
                 logger.exception(ex, exc_info=True)
             finally:
-                logger.debug(f'[TRACE][End] {trace_data}')
+                logger.debug(f'[Trace][End] {trace_data}')
 
         return wrapper
 

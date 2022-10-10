@@ -1,9 +1,9 @@
 import inspect
 import logging.config
 import os
+import sys
 
 from cs.core.utils.config import AppConfig
-
 
 # ログファイル名
 LOGGING_CONFIG_NAME: str = "logging_config.yml"
@@ -11,11 +11,13 @@ LOGGING_CONFIG_NAME: str = "logging_config.yml"
 # 探査するディレクトリの階層するを指定する
 SEARCH_LOGGING_CONFIG_FILE_DEPTH: int = 3
 
+# デフォルトログタイプ
+DEFAULT_LOG_TYPE = "develop"
 
-class CsLogger():
+
+class CsLogger:
     _instance = None
     _call_filepath = None
-    _log_type = "develop"
 
     def __new__(cls):
         """
@@ -26,7 +28,7 @@ class CsLogger():
         raise NotImplementedError('Cannot Generate Instance By Constructor')
 
     @classmethod
-    def __internal_new__(cls):
+    def __internal_new__(cls, file):
         """
             インスタンスを生成する
             初回インスタンス生成時は以下の振舞をする
@@ -37,37 +39,34 @@ class CsLogger():
             4. インスタンスを生成する
 
         """
-        cls._call_filepath = inspect.currentframe().f_back.f_code.co_filename
+        cls._call_filepath = os.path.abspath(file)
 
         # ローカルファイルにlogging_config.ymlを捜査して取得する
         log_config_path = cls.__detect_file_config()
         if log_config_path is None:
             # 検出できなかった場合はライブラリのコンフィグをロードする
-            print('logger_config file could not be detected. load library default config.')
+            sys.stdout.write('logger_config file could not be detected. load library default config.')
             log_config_path = AppConfig.get_config_dir(LOGGING_CONFIG_NAME)
             log_config = AppConfig.get_config_dict(log_config_path)
-            print('load library default config.({})'.format(log_config_path))
+            sys.stdout.write('load library default config.({})'.format(log_config_path))
         else:
-            print('load application logger config.({})'.format(log_config_path))
+            sys.stdout.write('load application logger config.({})'.format(log_config_path))
             log_config = AppConfig.get_config_dict(log_config_path)
-
-        # 環境変数(ENVIRONMENT)からLoggerの切り替え
-        env = os.environ.get('ENVIRONMENT')
-        if env is not None:
-            cls._log_type = env
 
         logging.config.dictConfig(log_config)
         return super().__new__(cls)
 
     @classmethod
-    def get_instance(cls):
+    def get_instance(cls, file):
         """
         CsLoggerインスタンスを取得する
 
         :return: インスタンス
         """
         if not cls._instance:
-            cls._instance = cls.__internal_new__()
+            cls._instance = cls.__internal_new__(file)
+            return cls._instance
+        else:
             return cls._instance
 
     @classmethod
@@ -76,10 +75,8 @@ class CsLogger():
         インスタンス、設定情報を削除する
         :return: なし
         """
-        cls._call_filepath = None
-        cls._log_type = None
-        del cls._instance
-
+        cls._call_filepath = ''
+        cls._instance = None
 
     @classmethod
     def __detect_file_config(cls, depth=SEARCH_LOGGING_CONFIG_FILE_DEPTH, path='') -> str:
@@ -115,13 +112,18 @@ class CsLogger():
                 parent_dir_path = os.path.dirname(path)
                 cls.__detect_file_config(depth=depth - 1, path=parent_dir_path)
 
-    def get_logger(self, name, log_type='develop'):
+    @classmethod
+    def get_logger(cls, name, log_type=None):
 
-        if self._log_type is not None:
-            log_type = self._log_type
+        if log_type is not None:
+            _log_type = log_type
+        else:
+            # 環境変数(ENVIRONMENT)からLoggerの切り替え
+            env = os.environ.get('ENVIRONMENT')
+            if env is not None:
+                _log_type = env
+            else:
+                _log_type = DEFAULT_LOG_TYPE
 
-        logger: logging.Logger = logging.getLogger(log_type + "." + name)
+        logger: logging.Logger = logging.getLogger(_log_type + "." + name)
         return logger
-
-
-
