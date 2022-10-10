@@ -1,7 +1,7 @@
 from cs.core.logger.cs_logger import CsLogger
 from cs.core.logger.trace import trace_log
 
-logger = CsLogger.get_instance().get_logger(__name__)
+logger = CsLogger.get_instance(__file__).get_logger(__name__)
 
 
 def zero_division():

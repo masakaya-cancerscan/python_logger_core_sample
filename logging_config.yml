@@ -10,13 +10,18 @@ handlers:
     class: logging.StreamHandler
     formatter: simple
     stream: ext://sys.stdout
+##---------------
+#  Cloud Loggingを利用する場合
+#   環境変数に「GOOGLE_APPLICATION_CREDENTIALS」と指定
+#   環境変数にはGoogle Cloud の sサービスアカウントからダウンロードしたjsonファイルパスを指定して利用すること
+##---------------
   cloud_logging:
     class: cs.core.logger.handler.CsCloudLoggingHandler
     formatter: json
 loggers:
   develop:
     level: DEBUG
-    handlers: [console,cloud_logging]
+    handlers: [console]
     propagate: no
   staging:
     level: INFO
@@ -26,10 +31,6 @@ loggers:
     level: INFO
     handlers: [cloud_logging]
     propagate: no
-#  default:
-#    level: INFO
-#    handlers: [ cloud_logging ]
-#    propagate: no
 # Root LoggerはTraceログのみ有効とする
 root:
   level: DEBUG
