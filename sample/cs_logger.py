@@ -1,8 +1,9 @@
 from cs.core.logger.cs_logger import CsLogger
 from cs.core.logger.trace import trace_log
 
-logger = CsLogger.get_instance(__file__).get_logger(__name__)
-
+cs_logger = CsLogger.get_instance(__file__)
+cs_logger.add_field({"user_id": "USER_HOGE", "trace_id": "123456"})
+logger = cs_logger.get_logger(__name__)
 
 def zero_division():
     1 / 0

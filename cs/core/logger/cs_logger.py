@@ -1,8 +1,10 @@
-import inspect
 import logging.config
 import os
 import sys
 
+from typing import Any, Dict
+
+from cs.core.logger.filter import LogAttribute
 from cs.core.utils.config import AppConfig
 
 # ログファイル名
@@ -35,8 +37,7 @@ class CsLogger:
 
             1. 初回インスタンス生成、呼び元のpyファイルの場所からloggerのコンフィグファイルを検索
             2. ログの設定ファイルが見つかった場合は、見つかった設定ファイル、見つからない場合が保持しているデフォルトの設定ファイルをロード
-            3. 環境変数を読み込み
-            4. インスタンスを生成する
+            3. インスタンスを生成する
 
         """
         cls._call_filepath = os.path.abspath(file)
@@ -45,12 +46,12 @@ class CsLogger:
         log_config_path = cls.__detect_file_config()
         if log_config_path is None:
             # 検出できなかった場合はライブラリのコンフィグをロードする
-            sys.stdout.write('logger_config file could not be detected. load library default config.')
+            sys.stdout.write('logger_config file could not be detected. load library default config.\n')
             log_config_path = AppConfig.get_config_dir(LOGGING_CONFIG_NAME)
             log_config = AppConfig.get_config_dict(log_config_path)
-            sys.stdout.write('load library default config.({})'.format(log_config_path))
+            sys.stdout.write('load library default config.({})\n'.format(log_config_path))
         else:
-            sys.stdout.write('load application logger config.({})'.format(log_config_path))
+            sys.stdout.write('load application logger config.({}\n)'.format(log_config_path))
             log_config = AppConfig.get_config_dict(log_config_path)
 
         logging.config.dictConfig(log_config)
@@ -77,6 +78,16 @@ class CsLogger:
         """
         cls._call_filepath = ''
         cls._instance = None
+
+    @classmethod
+    def add_field(cls, log_dict: Dict[str, Any]):
+        """
+        ログに追加フィールドを入れる
+        :param log_dict: 追加したいフィールド（フィールド名、出力値）
+        :return: void
+        """
+        for key, value in log_dict.items():
+            LogAttribute.__setattr__(key, value)
 
     @classmethod
     def __detect_file_config(cls, depth=SEARCH_LOGGING_CONFIG_FILE_DEPTH, path='') -> str:

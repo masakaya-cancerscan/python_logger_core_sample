@@ -6,7 +6,8 @@ import pytest
 
 from cs.core.logger.cs_logger import CsLogger
 from cs.core.logger.handler import CsCloudLoggingHandler
-from logging import DEBUG, INFO, ERROR, WARNING ,CRITICAL
+from logging import DEBUG, INFO, ERROR, WARNING, CRITICAL
+
 
 @pytest.fixture(autouse=True)
 def init_mock(mocker):
@@ -52,8 +53,8 @@ def test_not_detect_config(capsys):
     """
     testee = CsLogger.get_instance(__file__)
     captured = capsys.readouterr()
-    assert captured.out.find("logger_config file could not be detected. load library default config.") != -1
-    assert captured.out.find("load library default config.") != -1
+    assert "logger_config file could not be detected. load library default config." in captured.out
+    assert "load library default config." in captured.out
 
     # teardown
     testee.clear_instance()
@@ -71,7 +72,7 @@ def test_detect_config(capsys):
     shutil.copyfile(test_config_file_original, test_config_file)
     testee = CsLogger.get_instance(__file__)
     captured = capsys.readouterr()
-    assert captured.out.find("load application logger config.") != -1
+    assert "load application logger config." in captured.out
     # remove sample file.
     os.remove(test_config_file)
 
@@ -91,7 +92,7 @@ def test_detect_config_specify(capsys):
     shutil.copyfile(test_config_file_original, test_config_file)
     testee = CsLogger.get_instance(test_config_file)
     captured = capsys.readouterr()
-    assert captured.out.find("load application logger config.") != -1
+    assert "load application logger config." in captured.out
     # remove sample file.
     os.remove(test_config_file)
 
@@ -105,7 +106,7 @@ def test_detect_config_specify(capsys):
         (None, 'develop'),
         ('develop', 'develop'),
         ('staging', 'staging'),
-        ('production','production')
+        ('production', 'production')
     ]
 )
 def test_switch_loggers(input_value, expected_prefix):
@@ -182,5 +183,31 @@ def test_logging(caplog):
     CsLogger.get_instance(__file__).clear_instance()
 
 
+def test_logging_custom_field(caplog):
+    """
+    ログ出力試験(カスタムフィールド)
+    :param caplog: loggerの出力内容をキャプチャする(正常系)
+    :return:
+    """
+    logger_name = 'testLogger'
+    cs_logger = CsLogger.get_instance(__file__)
+    cs_logger.add_field({"user_id": "USER_HOGE", "trace_id": "123456"})
+    logger = cs_logger.get_logger(logger_name)
+    logger.addHandler(caplog.handler)
 
+    # トレースログの実行
+    with caplog.at_level(DEBUG):
+        def trace_test_function():
+            logger.debug("debug message")
+            pass
 
+        # テスト関数の実行
+        trace_test_function()
+
+    assert caplog.records[0].levelno == DEBUG
+    assert "debug message" in caplog.records[0].message
+    # カスタムフィールドが出力されていること
+    assert "USER_HOGE" in caplog.records[0].user_id
+
+    # teardown
+    CsLogger.get_instance(__file__).clear_instance()

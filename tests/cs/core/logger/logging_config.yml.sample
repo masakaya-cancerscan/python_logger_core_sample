@@ -1,22 +1,30 @@
 version: 1
 formatters:
   simple:
-    format: '[%(asctime)s][%(levelname)-8s][%(pathname)s:%(lineno)s] %(message)s'
+    format: '[%(asctime)s][%(levelname)-8s][%(pathname)s:%(lineno)s] %(message)s [user_id=%(user_id)s]'
   json:
     class: pythonjsonlogger.jsonlogger.JsonFormatter
-    format: '%(message)s'
+    format: '%(message)s %(user_id)'
+
+filters:
+  attribute_filter:
+    (): cs.core.logger.filter.LogAttributeFilter
+
 handlers:
   console:
     class: logging.StreamHandler
     formatter: simple
     stream: ext://sys.stdout
+    filters: [attribute_filter]
   cloud_logging:
     class: cs.core.logger.handler.CsCloudLoggingHandler
     formatter: json
+    filters: [attribute_filter]
+
 loggers:
   develop:
     level: DEBUG
-    handlers: [console]
+    handlers: [console,cloud_logging]
     propagate: no
   staging:
     level: INFO
@@ -33,4 +41,4 @@ loggers:
 # Root LoggerはTraceログのみ有効とする
 root:
   level: DEBUG
-  handlers: [console, cloud_logging]
+  handlers: [console]
