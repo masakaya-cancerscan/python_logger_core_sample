@@ -1,5 +1,4 @@
 from cs.core.logger.cs_logger import CsLogger
-from cs.core.logger.filter import LogAttribute
 from cs.core.logger.trace import trace_log
 
 cs_logger = CsLogger.get_instance(__file__)
