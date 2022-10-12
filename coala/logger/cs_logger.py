@@ -4,8 +4,8 @@ import sys
 
 from typing import Any, Dict
 
-from cs.core.logger.filter import LogAttribute
-from cs.core.utils.config import AppConfig
+from coala.logger.filter import LogAttribute
+from coala.utils.config import AppConfig
 
 # ログファイル名
 LOGGING_CONFIG_NAME: str = "logging_config.yml"

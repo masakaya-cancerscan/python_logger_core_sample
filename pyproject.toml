@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "python_logger_core_sample"
-version = "0.1.22"
+name = "coala-library"
+version = "0.0.1"
 description = ""
-authors = ["Masashi.Kayahara <masashi.kayahara@arc-connects.com>"]
+authors = [""]
 
 packages = [
-    { include = "cs" },
+    { include = "coala" },
 ]
 
 [tool.poetry.dependencies]

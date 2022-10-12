@@ -1,5 +1,5 @@
-from cs.core.logger.cs_logger import CsLogger
-from cs.core.logger.trace import trace_log
+from coala.logger.cs_logger import CsLogger
+from coala.logger.trace import trace_log
 
 cs_logger = CsLogger.get_instance(__file__)
 cs_logger.add_field({"user_id": "USER_HOGE", "trace_id": "123456"})
