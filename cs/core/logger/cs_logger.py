@@ -46,12 +46,12 @@ class CsLogger:
         log_config_path = cls.__detect_file_config()
         if log_config_path is None:
             # 検出できなかった場合はライブラリのコンフィグをロードする
-            sys.stdout.write('logger_config file could not be detected. load library default config.')
+            sys.stdout.write('logger_config file could not be detected. load library default config.\n')
             log_config_path = AppConfig.get_config_dir(LOGGING_CONFIG_NAME)
             log_config = AppConfig.get_config_dict(log_config_path)
-            sys.stdout.write('load library default config.({})'.format(log_config_path))
+            sys.stdout.write('load library default config.({})\n'.format(log_config_path))
         else:
-            sys.stdout.write('load application logger config.({})'.format(log_config_path))
+            sys.stdout.write('load application logger config.({}\n)'.format(log_config_path))
             log_config = AppConfig.get_config_dict(log_config_path)
 
         logging.config.dictConfig(log_config)
