@@ -4,8 +4,8 @@ import shutil
 
 import pytest
 
-from cs.core.logger.cs_logger import CsLogger
-from cs.core.logger.handler import CsCloudLoggingHandler
+from coala.logger.cs_logger import CsLogger
+from coala.logger.handler import CsCloudLoggingHandler
 from logging import DEBUG, INFO, ERROR, WARNING, CRITICAL
 
 

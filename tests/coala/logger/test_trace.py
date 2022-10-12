@@ -1,8 +1,8 @@
 import pytest
 
-from cs.core.logger.cs_logger import CsLogger
+from coala.logger.cs_logger import CsLogger
 from logging import DEBUG, ERROR
-from cs.core.logger.trace import trace_log
+from coala.logger.trace import trace_log
 
 
 @pytest.fixture(autouse=True)

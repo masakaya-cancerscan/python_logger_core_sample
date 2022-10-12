@@ -8,7 +8,7 @@ formatters:
 
 filters:
   attribute_filter:
-    (): cs.core.logger.filter.LogAttributeFilter
+    (): coala.logger.filter.LogAttributeFilter
 
 handlers:
   console:
@@ -17,7 +17,7 @@ handlers:
     stream: ext://sys.stdout
     filters: [attribute_filter]
   cloud_logging:
-    class: cs.core.logger.handler.CsCloudLoggingHandler
+    class: coala.logger.handler.CsCloudLoggingHandler
     formatter: json
     filters: [attribute_filter]
 

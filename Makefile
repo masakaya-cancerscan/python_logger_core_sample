@@ -7,11 +7,11 @@ test:
 
 .PHONY: test-report-term
 test-report-term:
-	poetry run pytest --cov=cs --cov-branch -v ./tests/* --cov-report=term
+	poetry run pytest --cov=coala --cov-branch -v ./tests/* --cov-report=term
 
 
 .PHONY: test-report-html
 test-report-html:
-	poetry run pytest --cov=cs --cov-branch -v ./tests/* --cov-report=html
+	poetry run pytest --cov=coala --cov-branch -v ./tests/* --cov-report=html
 
 

@@ -16,7 +16,7 @@ handlers:
 #   環境変数にはGoogle Cloud の sサービスアカウントからダウンロードしたjsonファイルパスを指定して利用すること
 ##---------------
   cloud_logging:
-    class: cs.core.logger.handler.CsCloudLoggingHandler
+    class: coala.core.logger.handler.CsCloudLoggingHandler
     formatter: json
 loggers:
   develop:
