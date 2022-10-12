@@ -1,8 +1,10 @@
-import inspect
 import logging.config
 import os
 import sys
 
+from typing import Any, Dict
+
+from cs.core.logger.filter import LogAttribute
 from cs.core.utils.config import AppConfig
 
 # ログファイル名
@@ -76,6 +78,16 @@ class CsLogger:
         """
         cls._call_filepath = ''
         cls._instance = None
+
+    @classmethod
+    def add_field(cls, log_dict: Dict[str, Any]):
+        """
+        ログに追加フィールドを入れる
+        :param log_dict: 追加したいフィールド（フィールド名、出力値）
+        :return: void
+        """
+        for key, value in log_dict.items():
+            LogAttribute.__setattr__(key, value)
 
     @classmethod
     def __detect_file_config(cls, depth=SEARCH_LOGGING_CONFIG_FILE_DEPTH, path='') -> str:
