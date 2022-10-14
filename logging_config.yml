@@ -1,27 +1,30 @@
 version: 1
 formatters:
   simple:
-    format: '[%(asctime)s][%(levelname)-8s][%(pathname)s:%(lineno)s] %(message)s'
+    format: '[%(asctime)s][%(levelname)-8s][%(pathname)s:%(lineno)s] %(message)s [user_id=%(user_id)s]'
   json:
     class: pythonjsonlogger.jsonlogger.JsonFormatter
-    format: '%(message)s'
+    format: '%(message)s %(user_id)'
+
+filters:
+  attribute_filter:
+    (): coala.logger.filter.LogAttributeFilter
+
 handlers:
   console:
     class: logging.StreamHandler
     formatter: simple
     stream: ext://sys.stdout
-##---------------
-#  Cloud Loggingを利用する場合
-#   環境変数に「GOOGLE_APPLICATION_CREDENTIALS」と指定
-#   環境変数にはGoogle Cloud の sサービスアカウントからダウンロードしたjsonファイルパスを指定して利用すること
-##---------------
+    filters: [attribute_filter]
   cloud_logging:
-    class: coala.core.logger.handler.CsCloudLoggingHandler
+    class: coala.logger.handler.CsCloudLoggingHandler
     formatter: json
+    filters: [attribute_filter]
+
 loggers:
   develop:
     level: DEBUG
-    handlers: [console]
+    handlers: [console,cloud_logging]
     propagate: no
   staging:
     level: INFO
@@ -31,6 +34,10 @@ loggers:
     level: INFO
     handlers: [cloud_logging]
     propagate: no
+#  default:
+#    level: INFO
+#    handlers: [ cloud_logging ]
+#    propagate: no
 # Root LoggerはTraceログのみ有効とする
 root:
   level: DEBUG
